@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111a2b"><title>Signal School · VHDL</title><link rel="stylesheet" href="./style.css?v=reference-4"><script type="module" src="./app.js?v=reference-4"></script></head>
+<body><div class="ambient-circuit" aria-hidden="true">
+<div class="ambient-glow ambient-glow-blue"></div><div class="ambient-glow ambient-glow-green"></div>
+<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+<defs>
+<path id="trace-one" d="M-40 190H160L220 250H340L400 190H610"/>
+<path id="trace-two" d="M1480 110H1240L1180 170H1080L1010 240H880"/>
+<path id="trace-three" d="M-40 650H120L190 580V470L250 410H370"/>
+<path id="trace-four" d="M1480 760H1300L1230 690V540L1170 480H1060"/>
+<path id="trace-five" d="M90 940V810L160 740H330"/>
+<path id="trace-six" d="M1360 -40V40L1300 100H1110"/>
+</defs>
+<g class="ambient-traces"><use href="#trace-one"/><use href="#trace-two"/><use href="#trace-three"/><use href="#trace-four"/><use href="#trace-five"/><use href="#trace-six"/></g>
+<g class="ambient-pulses"><use href="#trace-one"/><use href="#trace-two"/><use href="#trace-three"/><use href="#trace-four"/><use href="#trace-five"/><use href="#trace-six"/></g>
+<g class="ambient-nodes"><circle cx="610" cy="190" r="4"/><circle cx="880" cy="240" r="4"/><circle cx="370" cy="410" r="4"/><circle cx="1060" cy="480" r="4"/><circle cx="330" cy="740" r="4"/></g>
+</svg></div><header class="topbar"><a href="./" class="brand">◈ <span>Signal School</span><small>VHDL LAB</small></a><div class="preferences"><label for="language" data-i18n="language">Language</label><select id="language"><option value="en">English</option><option value="de">Deutsch</option></select><label for="theme" data-i18n="theme">Appearance</label><select id="theme"><option value="system" data-i18n="system">System</option><option value="light" data-i18n="light">Light</option><option value="dark" data-i18n="dark">Dark</option></select><label class="motion-control"><input id="background-motion" type="checkbox" checked><span data-i18n="backgroundMotion">Background motion</span></label></div></header>
+<main><section class="intro"><a href="./hardware.html" data-i18n="hardwareLink">Basys 3 hardware lessons →</a><p class="eyebrow" data-i18n="course">YOUR FIRST CIRCUIT · LESSON 01</p><h1 data-i18n="headline">Small signals. Real circuits.</h1><p data-i18n="subhead">Learn how two inputs become one output — then bring your VHDL to life.</p></section>
+<nav class="card course-navigation" aria-label="Course lessons"><p id="course-summary"></p><div id="course-nav"></div></nav>
+<details class="card compendium" id="compendium"><summary data-i18n="referenceTitle">Syntax and concept compendium</summary><p data-i18n="referenceIntro"></p><label for="reference-search" data-i18n="referenceSearch">Search unlocked entries</label><input id="reference-search" type="search"><p id="reference-status" role="status"></p><div id="reference-entries"></div></details>
+<div class="workspace"><aside class="card lesson"><p class="eyebrow" data-i18n="guided">GUIDED LESSON</p><nav id="steps" aria-label="Lesson steps"></nav><h2 id="lesson-title"></h2><p id="lesson-body"></p><div class="concept" id="lesson-example"></div><button id="next" class="secondary" data-i18n="next">Next concept →</button><details><summary data-i18n="hint">Need a hint?</summary><p data-i18n="hintText">Keep the entity name and_gate and ports a, b, y. Inside the architecture, connect the output with y &lt;= a and b; — VHDL describes connections that act concurrently.</p></details><section class="prediction"><h3 id="question-prompt"></h3><div id="question-options" class="actions"></div><p id="question-feedback" role="status"></p></section></aside>
+<section class="card lab" id="lab-section"><div class="section-heading"><h2 data-i18n="gate"></h2><span class="badge" data-i18n="preview">Concept preview</span></div><p class="muted" data-i18n="previewText"></p><div id="gate-animation"></div><div class="table-scroll"><table id="sample-table"></table></div></section>
+<section class="card editor" id="editor-section"><div class="section-heading"><div><p class="eyebrow" data-i18n="write">WRITE THE HARDWARE</p><a href="#compendium" id="open-reference" class="text-button" data-i18n="referenceOpen">Syntax reference ↓</a><h2 id="editor-title">and_gate.vhd</h2></div><button id="export-vhdl" class="text-button" data-i18n="downloadCode">Download VHDL</button></div><label for="code" class="muted" data-i18n="editorLabel">VHDL source · edit the architecture and run all four inputs</label><textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="editor-help"></textarea><p id="editor-help" class="muted" data-i18n="editorHelp">The testbench samples each input pair after 10 ns. Use entity and_gate with std_logic ports a, b and y.</p><div class="actions"><button id="run" class="primary" data-i18n="run">▶ Run simulation</button><button id="reset" class="secondary" data-i18n="reset">Reset code</button><span class="muted" id="save-status"></span></div></section>
+<section class="card results"><p class="eyebrow" data-i18n="inspect">READ THE SIGNALS</p><h2 data-i18n="waveform">Simulation waveform</h2><p id="result-status" role="status" data-i18n="notRun">Run your design to see real GHDL results.</p><div id="waveform"></div><details><summary data-i18n="diagnostics">GHDL diagnostics</summary><pre id="diagnostics"></pre></details><button id="complete" class="secondary" disabled data-i18n="complete">Complete lesson ✓</button></section>
+</div><section class="card settings"><h2 data-i18n="connection">Simulation connection</h2><p class="muted" data-i18n="connectionText">Lessons and edits work offline. Real simulation needs your local GHDL service. The access code stays in memory for this session.</p><details class="connection-guide" open>
+<summary data-i18n="setupTitle">How to connect the simulator</summary>
+<p data-i18n="setupIntro"></p>
+<h3 data-i18n="setupLocal"></h3>
+<ol>
+<li><p data-i18n="setupLocalOne"></p><pre><code>cd "C:\Users\simon\Projects\VHDL Learning Webapp"
+$env:VHDL_TRUSTED_LOCAL = '1'
+python server.py</code></pre><h3 data-i18n="setupBash">Bash (Git Bash / Linux / macOS)</h3><p data-i18n="setupBashHelp"></p><pre><code>VHDL_TRUSTED_LOCAL=1 python server.py</code></pre></li>
+<li><p data-i18n="setupLocalTwo"></p></li>
+</ol>
+<details><summary data-i18n="setupReconnect"></summary><p data-i18n="setupLocalThree"></p><p data-i18n="setupStatus"></p></details>
+<details><summary data-i18n="setupStop"></summary><p data-i18n="setupLocalFour"></p><ol>
+<li><p data-i18n="setupFindProcess"></p><pre><code>Get-NetTCPConnection -LocalPort 8000 -State Listen |
+    Select-Object OwningProcess -Unique</code></pre></li>
+<li><p data-i18n="setupInspectProcess"></p><pre><code>Get-CimInstance Win32_Process -Filter "ProcessId = 12345" |
+    Select-Object ProcessId, Name, CommandLine</code></pre></li>
+<li><p data-i18n="setupStopProcess"></p><pre><code>Stop-Process -Id 12345</code></pre></li>
+</ol><p data-i18n="setupVerifyStop"></p></details>
+<details><summary data-i18n="setupXampp"></summary><p data-i18n="setupXamppText"></p><pre><code>$env:VHDL_ALLOWED_ORIGINS = 'http://localhost'</code></pre></details>
+<details><summary data-i18n="setupRemote"></summary><ol>
+<li><p data-i18n="setupRemoteOne"></p></li>
+<li><p data-i18n="setupRemoteTwo"></p><pre><code>$env:VHDL_ALLOWED_ORIGINS = 'https://OWNER.github.io'</code></pre></li>
+<li><p data-i18n="setupRemoteThree"></p></li>
+<li><p data-i18n="setupRemoteFour"></p></li>
+</ol><p data-i18n="setupTrusted"></p></details>
+<details><summary data-i18n="setupTrouble"></summary><p data-i18n="setupTroubleText"></p></details>
+</details><div class="connection-fields"><div><label for="api-url" data-i18n="serviceUrl">Service URL</label><input id="api-url" type="url" placeholder="http://127.0.0.1:8000"></div><div><label for="token" data-i18n="accessCode">Session access code</label><input id="token" type="password" autocomplete="off"></div><button id="share" class="secondary" data-i18n="share">Copy connection link</button></div><p id="connection-status" role="status"></p><div class="actions"><button id="export-progress" class="secondary" data-i18n="exportProgress">Export progress / backup</button><label for="import-progress" class="file-label" data-i18n="importProgress">Import progress</label><input id="import-progress" type="file" accept=".json,application/json"><span class="muted" data-i18n="privacy">Saved in this browser. No accounts. No tracking.</span></div><p id="notice" role="status"></p></section></main><footer data-i18n="footer">Built for curious minds. One circuit at a time.</footer>
+<dialog id="import-dialog"><h2 data-i18n="importTitle">Replace your saved progress?</h2><p id="import-preview"></p><p data-i18n="importWarning">Download a backup before replacing your current code and preferences.</p><div class="actions"><button id="backup" class="secondary" data-i18n="backup">Download current backup</button><button id="cancel-import" class="secondary" data-i18n="cancel">Cancel</button><button id="confirm-import" class="primary" data-i18n="replace">Replace progress</button></div></dialog></body></html>
