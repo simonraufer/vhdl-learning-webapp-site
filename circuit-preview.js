@@ -47,9 +47,31 @@ export function renderPreview(container,id,state,language,onChange) {
       svg.append(pulse);
     }
   };
-  const gate=(label,x,y,w=100,h=66)=>{
-    svg.append(svgElement('rect',{x,y:y-h/2,width:w,height:h,rx:12,class:'signal-gate'}));
-    svg.append(svgElement('text',{x:x+w/2,y:y+5,'text-anchor':'middle'},label));
+  const gate=(label,x,y,w=100,h=66,inputOffset=10)=>{
+    const group=svgElement('g',{transform:`translate(${x} ${y-h/2}) scale(${w/100} ${h/100})`});
+    // Normalized symbols keep the wire endpoints fixed across lesson layouts.
+    const shapes={
+      AND:'M0 0H50C116.667 0 116.667 100 50 100H0Z',
+      OR:'M0 0Q60 0 100 50Q60 100 0 100Q28 50 0 0Z',
+      XOR:'M10 0Q65 0 100 50Q65 100 10 100Q38 50 10 0Z',
+      NOT:'M0 0L84 50L0 100Z',
+      MUX:'M0 0L100 20V80L0 100Z'
+    };
+    if(shapes[label]) {
+      group.append(svgElement('path',{d:shapes[label],class:'signal-gate'}));
+      if(label==='XOR')group.append(svgElement('path',{d:'M0 0Q28 50 0 100',class:'signal-gate-extra'}));
+      if(label==='OR'||label==='XOR') {
+        [-inputOffset,inputOffset].forEach(offset=>{
+          const portY=50+offset*100/h;
+          const t=portY/100;
+          const end=(label==='XOR'?10:0)+56*t*(1-t);
+          group.append(svgElement('path',{d:`M0 ${portY}H${end}`,class:'signal-gate-extra'}));
+        });
+      }
+      if(label==='NOT')group.append(svgElement('circle',{cx:92,cy:50,r:8,class:'signal-gate'}));
+    } else group.append(svgElement('rect',{x:0,y:0,width:100,height:100,rx:3,class:'signal-gate'}));
+    svg.append(group);
+    svg.append(svgElement('text',{x:x+w/2,y:y-h/2-9,'text-anchor':'middle'},label));
   };
   const input=(name,value,x,y,choices=['0','1'],bitIndex=null)=>{
     const button=document.createElement('button');button.type='button';button.className='circuit-input';
@@ -73,7 +95,7 @@ export function renderPreview(container,id,state,language,onChange) {
   if(id==='logic') {
     input('a',state.a,45,90);input('b',state.b,45,230);
     [['NOT',70,'n'],['OR',160,'o'],['XOR',250,'x']].forEach(([label,y,key])=>{
-      wire(45,90,205,y-10,state.a);if(key!=='n')wire(45,230,205,y+10,state.b);
+      wire(45,90,205,key==='n'?y:y-10,state.a);if(key!=='n')wire(45,230,205,y+10,state.b);
       gate(label,205,y);wire(305,y,530,y,outputs[key]);led(key,outputs[key],550,y);
     });
   } else if(id==='vectors') {
@@ -83,7 +105,7 @@ export function renderPreview(container,id,state,language,onChange) {
   } else if(id==='combine') {
     input('a',state.a,45,60);input('b',state.b,45,130);input('c',state.c,45,250);
     wire(45,60,185,75,state.a);wire(45,130,185,115,state.b);gate('AND',185,95,85);
-    wire(270,95,380,145,outputs.both_on);wire(45,250,380,185,state.c);gate('OR',380,165,80);
+    wire(270,95,380,145,outputs.both_on);wire(45,250,380,185,state.c);gate('OR',380,165,80,66,20);
     svg.append(svgElement('text',{x:300,y:80},`both_on=${outputs.both_on}`));wire(460,165,530,165,outputs.y);led('y',outputs.y,550,165);
   } else {
     const positions=inputs.length===3?[60,160,260]:[95,225];
